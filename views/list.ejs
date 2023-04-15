@@ -1,0 +1,26 @@
+<%- include("header") -%>
+
+  <div class="box fixed-top" id="heading">
+    <h1> <%= listTitle %> </h1>
+  </div>
+
+  <div class="box margin-top">
+    <% newListItems.forEach(function(item) {%>
+      <form action="/delete" method="post">
+      <div class="item">
+        <input type="checkbox" class="task-checkbox" name="checkbox" value="<%=  item._id  %> <%=  listTitle  %>">
+<!-- Another way to pass multiple values in a signal form is to defina a new Input block of type hidden -->
+        <p><%=  item.task  %></p>
+      </div>
+    </form> 
+      <% }); %>
+
+
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="Add task" autocomplete="off">
+        <button type="submit" name="list" value="<%=  listTitle  %>">+</button>
+        <button type="button" class="update-btn">⟳</button>
+      </form>
+  </div>
+
+<%- include("footer") -%>

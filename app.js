@@ -1,11 +1,14 @@
 //jshint esversion:6
 
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const date = require(__dirname + "/date.js");
 const { Console, log } = require("console");
 const _ = require('lodash');
+
+require('dotenv').config();
 
 const app = express();
 
@@ -14,8 +17,12 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://127.0.0.1:27017/todoListDB", { useNewUrlParser: true });
-console.log("Database Connected");
+// mongoose.connect("mongodb://127.0.0.1:27017/todoListDB", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+
+console.log(process.env.MONGODB_URI);
+
+console.log("Database Connected on glitch");
 
 const itemsSchema = {
   task: String
@@ -183,6 +190,6 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+app.listen(process.env.PORT || 3000, "0.0.0.0", function () {
+  console.log("Server started on port " + process.env.PORT);
 });

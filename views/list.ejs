@@ -10,14 +10,16 @@
       <div class="item">
         <input type="checkbox" class="task-checkbox" name="checkbox" value="<%=  item._id  %> <%=  listTitle  %>">
 <!-- Another way to pass multiple values in a signal form is to defina a new Input block of type hidden -->
-        <p><%=  item.task  %></p>
+        <div class="p-container"> <!-- Add this wrapper div -->
+            <p><%=  item.task  %></p>
+          </div>
       </div>
     </form> 
       <% }); %>
 
 
       <form class="item" action="/" method="post">
-        <input type="text" name="newItem" placeholder="Add task" autocomplete="off">
+        <input class="item-input" type="text" name="newItem" placeholder="Add task" autocomplete="off">
         <button type="submit" name="list" value="<%=  listTitle  %>">+</button>
         <button type="button" class="update-btn">⟳</button>
       </form>
